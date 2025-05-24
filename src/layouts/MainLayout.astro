@@ -1,0 +1,79 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import FiltersPage from "../components/FiltersPage.astro";
+import '@fontsource/ibm-plex-mono';
+
+import {SITE_TITLE, SITE_DESCRIPTION} from "../consts";
+import { ClientRouter } from 'astro:transitions';
+
+// Define interface for component props
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  image?: string;
+  author?: string;
+  noindex?: boolean;
+}
+
+// Get component props with defaults
+const {
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  keywords = '',
+  image,
+  author,
+  noindex = false
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <BaseHead
+    title={title}
+    description={description}
+    keywords={keywords}
+    image={image}
+    author={author}
+    noindex={noindex}
+  />
+  <ClientRouter />
+</head>
+
+<body class="bg-gray-700 crt-effect">
+<FiltersPage/>
+<div class="crt-tv flicker">
+
+  <!--<canvas id="tv-static-canvas" class="hidden sm:block"></canvas>-->
+
+  <div class="crt-screen overflow-y-hidden">
+
+    <main
+      class="flex flex-col text-shadow-terminal-teal text-teal-200 w-full"
+    >
+      <slot/>
+    </main>
+
+  </div>
+</div>
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', () => {
+
+    import('../scripts/crtEffects.js')
+      .then(module => {
+
+      const {initCRTStatic} = module;
+
+      initCRTStatic();
+
+    }).catch(error => {
+      console.error('Error loading CRT effects:', error);
+    });
+
+  });
+</script>
+</body>
+</html>

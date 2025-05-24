@@ -1,0 +1,62 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import EntriesScreen from "../../components/vue/EntriesScreen.vue";
+import { getCollection } from "astro:content";
+import { SITE_TITLE } from "../../consts";
+
+const entries = await getCollection('entry');
+
+
+const processedEntries = entries
+  .map(entry => {
+    const pathParts = entry.id.split('/');
+    const lang = pathParts.length >= 2 ? pathParts[0] : 'en';
+
+    return {
+      ...entry,
+      lang
+    };
+  })
+  .filter(entry => entry.data.published)
+  .sort((a, b) => {
+
+    if (a.lang === 'en' && b.lang !== 'en') return -1;
+    if (a.lang !== 'en' && b.lang === 'en') return 1;
+
+
+    return b.data.pubDate.getTime() - a.data.pubDate.getTime();
+  });
+
+
+const allTags = [
+  ...new Set(processedEntries.flatMap(entry => entry.data.tags || []))
+].sort();
+
+
+const pageTitle = `Entries | ${SITE_TITLE}`;
+const pageDescription = `Browse all blog posts and articles from ${SITE_TITLE}. Topics include ${allTags.slice(0, 5).join(', ')}${allTags.length > 5 ? ', and more' : ''}.`;
+const pageKeywords = allTags.join(', ');
+---
+
+<MainLayout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}>
+  <Header />
+
+  <div class="flex grow flex-col overflow-y-auto">
+    <div class="container mx-auto flex flex-col grow mb-4">
+      <div
+        class="cursor-pointer border border-teal-300 px-4 py-2 duration-200 text-teal-300 text-xl"
+      >
+        <h2 class="text-shadow text-shadow-teal-400">All Entries</h2>
+      </div>
+
+      <EntriesScreen client:load entries={processedEntries} allTags={allTags} />
+    </div>
+  </div>
+
+  <Footer />
+</MainLayout>

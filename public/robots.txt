@@ -1,0 +1,10 @@
+# robots.txt for greencsv.dev
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.greencsv.dev/sitemap-index.xml
+
+# Crawl-delay for all bots
+Crawl-delay: 10

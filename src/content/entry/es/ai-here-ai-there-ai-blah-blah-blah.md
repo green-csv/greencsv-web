@@ -5,6 +5,7 @@ tags:
   - reflection
   - methodology
   - AI
+  - espanol 
 description: Reflexión crítica sobre la saturación de modas pasajeras en IA y la importancia de fundamentos sólidos. resumen por GPT
 cover: ""
 language: es

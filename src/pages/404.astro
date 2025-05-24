@@ -1,0 +1,33 @@
+---
+import CleanLayout from "../layouts/CleanLayout.astro";
+import { SITE_TITLE } from "../consts";
+
+// Get the current URL from the request
+const { url } = Astro;
+const requestedPath = url.pathname;
+
+// Generate a random "error code" for the retro computer feel
+const errorCode = Math.floor(Math.random() * 9000) + 1000;
+
+// Custom page title for the 404 page
+const pageTitle = `404: NO SIGNAL | ${SITE_TITLE}`;
+---
+
+<CleanLayout title={pageTitle} noindex={true}>
+  <div class="flex flex-col items-center text-center">
+
+  <div class="text-6xl ">
+    <span class="path-text glitch-text" data-text="NO SIGNAL">NO SIGNAL</span>
+  </div>
+
+    <div class="text-red-500 my-4 font-mono text-xl">
+      <span class="error-code glitch-text" data-text={`ERROR ${errorCode}`}>ERROR {errorCode}</span>
+    </div>
+
+    <div class="text-yellow-400 my-2 font-mono text-lg">
+      <span class="path-text glitch-text" data-text={`${requestedPath}`}>{requestedPath}</span>
+      <span class="blinking-cursor">_</span>
+    </div>
+
+  </div>
+</CleanLayout>

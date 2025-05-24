@@ -1,0 +1,105 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import FiltersPage from "../components/FiltersPage.astro";
+import '@fontsource/ibm-plex-mono';
+
+import {SITE_TITLE, SITE_DESCRIPTION} from "../consts";
+import ProjectsScreen from "../components/vue/ProjectsScreen.vue";
+import EntriesScreen from "../components/vue/EntriesScreen.vue";
+import FilterDemo from "../components/vue/FilterDemo.vue";
+import {getCollection} from 'astro:content';
+import {ClientRouter} from 'astro:transitions';
+
+// Define interface for component props
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  image?: string;
+  author?: string;
+  noindex?: boolean;
+}
+
+// Get component props with defaults
+const {
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  keywords = '',
+  image,
+  author,
+  noindex = false
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <BaseHead
+    title={title}
+    description={description}
+    keywords={keywords}
+    image={image}
+    author={author}
+    noindex={noindex}
+  />
+  <ClientRouter/>
+</head>
+
+<body class="bg-gray-700 crt-effect">
+<FiltersPage/>
+<div class="crt-tv flicker">
+
+  <canvas id="tv-static-canvas" class="hidden sm:block"></canvas>
+
+  <div class="crt-screen overflow-y-hidden">
+
+    <main
+      class="flex flex-col text-shadow-terminal-teal text-teal-200 w-full"
+    >
+
+      <hr class="bg-teal-500 border flex-none h-[2px] my-4 shadow-md"/>
+
+      <div class="flex grow flex-col overflow-y-auto">
+        <div class="container mx-auto flex flex-col grow mb-4">
+
+          <div
+            class="fixed inset-0 flex flex-col place-self-center text-2xl">
+
+            <slot/>
+
+            <small>Requested resource not found.
+              <a href="#"
+                 class="flex  text-sky-100 items-center gap-2"
+                 onclick="history.back()">
+                Return
+                <i class="bi bi-caret-left"></i>
+              </a>
+            </small>
+          </div>
+
+
+        </div>
+      </div>
+
+      <Footer/>
+    </main>
+
+  </div>
+</div>
+
+<script>
+  // Initialize the CRT static effect when the page loads
+  document.addEventListener('DOMContentLoaded', () => {
+    // Import the initCRTStatic function from the crtEffects.js file
+    import('../scripts/crtEffects.js').then(module => {
+      const {initCRTStatic} = module;
+      initCRTStatic();
+    }).catch(error => {
+      console.error('Error loading CRT effects:', error);
+    });
+  });
+</script>
+</body>
+</html>

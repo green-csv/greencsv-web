@@ -36,38 +36,6 @@
       </div>
     </div>
 
-    <div class="mt-8">
-      <h3 class="text-lg mb-2">How to Use</h3>
-      <pre class="bg-gray-800 p-4 rounded overflow-x-auto">
-        <code>
-// Apply grain effect
-&lt;div class="grain-effect"&gt;Your content here&lt;/div&gt;
-
-// Apply chromatic aberration
-&lt;div class="chromatic-aberration-effect"&gt;Your content here&lt;/div&gt;
-
-// Apply combined CRT effect (grain + chromatic aberration + jitter)
-&lt;div class="crt-effect"&gt;Your content here&lt;/div&gt;
-        </code>
-      </pre>
-    </div>
-
-    <div class="mt-8">
-      <h3 class="text-lg mb-2">Implementation Details</h3>
-      <p class="mb-4">These filters are implemented using SVG filters defined in the <code>FiltersPage.astro</code>
-        component:</p>
-      <ul class="list-disc pl-6 mb-4">
-        <li><strong>Grain Effect</strong>: Uses <code>feTurbulence</code> and <code>feColorMatrix</code> to create a
-          noise pattern
-        </li>
-        <li><strong>Chromatic Aberration</strong>: Separates RGB channels and applies slight offsets</li>
-        <li><strong>CRT Master Filter</strong>: Combines both effects with additional animations</li>
-      </ul>
-      <p>The CSS classes are defined in <code>crt-tv.css</code> and apply these SVG filters to HTML elements.</p>
-      <p class="mt-4">For more detailed documentation, see the <a
-          href="https://github.com/GreenCsv/greencsv-web/blob/main/src/docs/filters.md"
-          class="text-blue-400 hover:text-blue-300 underline">SVG Filters Documentation</a>.</p>
-    </div>
   </div>
 </template>
 
