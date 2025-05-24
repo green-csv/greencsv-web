@@ -1,0 +1,19 @@
+@import "./crt-tv.css";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-mono: "IBM Plex Mono", monospace;
+  --font-sans: "IBM Plex Mono", monospace;
+  --font-serif: "IBM Plex Mono", serif;
+  --font-monospace: "IBM Plex Mono", monospace;
+
+/*  --text-shadow-terminal-teal:
+    0 0 1px var(--color-teal-500),
+    0 0 2px var(--color-teal-500),
+    0 0 8px var(--color-teal-700);*/
+}
+
+

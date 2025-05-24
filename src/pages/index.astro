@@ -1,0 +1,103 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import FiltersPage from "../components/FiltersPage.astro";
+import '@fontsource/ibm-plex-mono';
+
+import {SITE_TITLE, SITE_DESCRIPTION} from "../consts";
+import ProjectsScreen from "../components/Screens/ProjectsScreen.astro";
+import EntriesScreen from "../components/vue/EntriesScreen.vue";
+import FilterDemo from "../components/vue/FilterDemo.vue";
+import { getCollection } from 'astro:content';
+import { ClientRouter } from 'astro:transitions';
+
+const entries = await getCollection('entry');
+
+const processedEntries = entries
+  .map(entry => {
+    const pathParts = entry.id.split('/');
+    const lang = pathParts.length >= 2 ? pathParts[0] : 'en'; // Default to 'en' if no language specified
+
+    return {
+      ...entry,
+      lang
+    };
+  })
+  .filter(entry => entry.data.published)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+
+const allTags = [
+  ...new Set(processedEntries.flatMap(entry => entry.data.tags || []))
+].sort();
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION}/>
+  <ClientRouter />
+</head>
+
+<body class="bg-gray-700 crt-effect">
+<FiltersPage/>
+<div class="crt-tv flicker">
+
+  <canvas id="tv-static-canvas" class="hidden sm:block"></canvas>
+
+  <div class="crt-screen overflow-y-hidden">
+
+    <main
+      class="flex flex-col text-shadow-terminal-teal text-teal-200 w-full"
+    >
+      <Header/>
+
+      <div class="flex grow flex-col overflow-y-auto">
+        <div class="container mx-auto flex flex-col grow mb-4">
+          <div
+            class="cursor-pointe border border-teal-300 px-4 py-2 duration-200 text-teal-300 text-xl"
+          >
+            <h2 class="text-shadow text-shadow-teal-400">Projects</h2>
+          </div>
+
+          <ProjectsScreen transition:animate="fade"/>
+
+          <div
+            class="cursor-pointer border border-teal-300 px-4 py-2 duration-200 text-teal-300 text-xl mt-4"
+          >
+            <h2 class="text-shadow text-shadow-teal-400">Filter Effects</h2>
+          </div>
+
+          <FilterDemo client:load transition:animate="fade" />
+
+          <div
+            class="cursor-pointer border border-teal-300 px-4 py-2 duration-200 text-teal-300 text-xl mt-4"
+          >
+            <h2 class="text-shadow text-shadow-teal-400">Entries</h2>
+          </div>
+
+          <EntriesScreen client:load entries={processedEntries} allTags={allTags} transition:animate="fade" />
+        </div>
+      </div>
+
+      <Footer/>
+    </main>
+
+  </div>
+</div>
+
+<script>
+  // Initialize the CRT static effect when the page loads
+  document.addEventListener('DOMContentLoaded', () => {
+    // Import the initCRTStatic function from the crtEffects.js file
+    import('../scripts/crtEffects.js').then(module => {
+      const {initCRTStatic} = module;
+      initCRTStatic();
+    }).catch(error => {
+      console.error('Error loading CRT effects:', error);
+    });
+  });
+</script>
+</body>
+</html>

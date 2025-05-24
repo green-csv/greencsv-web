@@ -1,0 +1,31 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import BlogPost from '../../../layouts/EntryLayout.astro';
+import { render } from 'astro:content';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('entry');
+  debugger
+	return posts.map((post) => {
+		// Extract language from the post.id (e.g., "en/some-post" or "es/some-post")
+		const pathParts = post.id.split('/');
+		if (pathParts.length < 2) return null;
+
+		const lang = pathParts[0];
+		const slug = pathParts.slice(1).join('/');
+
+		return {
+			params: { lang, slug },
+			props: post,
+		};
+	}).filter(Boolean);
+}
+type Props = CollectionEntry<'entry'>;
+
+const post = Astro.props;
+const { Content } = await render(post);
+---
+
+<BlogPost {...post.data}>
+	<Content />
+</BlogPost>

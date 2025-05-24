@@ -1,0 +1,88 @@
+---
+import projectsData from '../../data/projects.json';
+
+interface ProjectLink {
+  url: string;
+  label: string;
+  icon: string;
+}
+
+interface ProjectViewModel {
+  id: string;
+  name: string;
+  description: string;
+  imagePath: string;
+  createdAt: string;
+  status: string;
+  tags: string[];
+  links: ProjectLink[];
+}
+
+// Add id field to projects if missing
+const projects: ProjectViewModel[] = projectsData.map((project, index) => ({
+  id: project.id || `project-${index + 1}`,
+  name: project.name,
+  description: project.description,
+  imagePath: project.imagePath,
+  createdAt: project.createdAt,
+  status: project.status,
+  tags: project.tags,
+  links: project.links
+}));
+---
+
+<div class="flex flex-col gap-4 md:px-8 px-2 pt-4">
+  {
+    projects.map((project) => (
+      <div
+        class="group flex flex-wrap flex-1 flex-row md:flex-nowrap sm:flex-row gap-4 p-4 hover:bg-gray-900
+          hover:text-shadow-terminal-teal transition-all duration-200"
+      >
+        <div class="flex justify-end sm:items-center sm:justify-center sm:w-48 sm:h-32 w-full h-24 rounded-sm overflow-hidden">
+          <img
+            src={project.imagePath}
+            alt="Preview"
+            class="border w-auto h-full object-cover opacity-70 p-1
+            filter grayscale brightness-75
+            group-hover:filter-none group-hover:brightness-100 group-hover:opacity-100
+            transition-all duration-500 ease-in-out"
+          />
+        </div>
+
+        <div class="flex flex-1 flex-col relative">
+          <h2 class="uppercase font-bold shadow-none">&gt;_ {project.id}</h2>
+          <div class="pt-1 font-semibold shadow-none">{project.name}</div>
+          <div>{project.description}</div>
+
+          <div class="pt-2 text-teal-300">
+            Created: {new Date(project.createdAt).toLocaleDateString()}
+            {" | "}Status: {project.status}
+          </div>
+
+          <div class="pt-1 flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <div class="px-2 py-0.5 bg-teal-800/40 text-teal-200 rounded-sm tracking-wider">
+                [ {tag} ]
+              </div>
+            ))}
+          </div>
+
+          <div class="pt-3 flex flex-wrap gap-4">
+            {project.links.map((link) => (
+              <a
+                href={link.url}
+                target="_blank"
+                class="flex bg-sky-100 text-teal-800 px-3 py-1 rounded-sm hover:bg-indigo-500 hover:text-sky-100 transition-colors duration-200 items-center gap-2"
+              >
+                <span class="flex items-center gap-1">
+                  <i class={`bi bi-${link.icon.toLowerCase()}`} /> _
+                </span>
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</div>

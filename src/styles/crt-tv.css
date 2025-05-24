@@ -1,0 +1,161 @@
+﻿.crt-tv {
+  position: fixed;
+  width: 100vw;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 🔵 Convex Glass Effect */
+.crt-tv::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.6) 100%);
+  z-index: 2;
+}
+
+/* 🔴 CRT Scanlines */
+.crt-tv::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+                  to bottom,
+                  rgba(255, 255, 255, 0.05) 0%,
+                  rgba(255, 255, 255, 0.05) 1px,
+                  transparent 2px,
+                  transparent 5px
+  );
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ⚡ Flicker Effect */
+@keyframes flicker {
+  0% { opacity: 1; }
+  50% { opacity: 0.97; }
+  100% { opacity: 1; }
+}
+
+.flicker {
+  animation: flicker 5s infinite alternate;
+}
+
+/* 📺 Retro TV Static (Noise Effect) */
+#tv-static-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 📟 Full-Screen Content Area */
+.crt-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(1px);
+  backdrop-filter: blur(1px);
+  display: flex;
+  z-index: 2;
+}
+
+.crt-static{
+  animation: none !important;
+}
+
+.boot-line {
+  animation: cascadeLine 0.01s ease forwards;
+  animation-fill-mode: forwards;
+}
+
+@keyframes cascadeLine {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dots {
+  0% { content: '.'; }
+  33% { content: '..'; }
+  66% { content: '...'; }
+  100% { content: ''; }
+}
+
+.dot-cycle::after {
+  content: '';
+  animation: dotdotdot 1.2s steps(4, end) infinite;
+}
+
+@keyframes dotdotdot {
+  0% { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+  100% { content: ''; }
+}
+
+
+
+.crt-effect {
+  filter: url(#crt-master-filter);
+  animation:crt-jitter 0.02s infinite;
+}
+
+.crt-effect * {
+  pointer-events: auto;
+}
+
+.grain-effect {
+  filter: url(#grainy);
+}
+
+.chromatic-aberration-effect {
+  filter: url(#chromatic-aberration);
+}
+
+@keyframes crt-jitter {
+  0% { transform: translate(0px, 0px); }
+  25% { transform: translate(-0.02px, 0.02px); }
+  50% { transform: translate(0.03px, -0.02px); }
+  75% { transform: translate(-0.02px, 0.01px); }
+  100% { transform: translate(0px, 0px); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+.blinking-cursor {
+  display: inline-block;
+  animation: blink 1s step-start infinite;
+}
+
+@layer base {
+  a,
+  button {
+    @apply cursor-pointer;
+  }
+
+  button:disabled,
+  a[disabled] {
+    @apply cursor-not-allowed;
+  }
+
+ /* !* Hide scrollbars but keep scrolling functionality *!
+  * {
+    scrollbar-width: none; !* Firefox *!
+    -ms-overflow-style: none; !* IE and Edge *!
+  }
+
+  !* Hide scrollbar for Chrome, Safari and Opera *!
+  *::-webkit-scrollbar {
+    display: none;
+  }*/
+}

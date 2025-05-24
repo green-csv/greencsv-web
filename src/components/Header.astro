@@ -1,0 +1,13 @@
+---
+import HeaderLink from './HeaderLink.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+
+<header class="container mx-auto text-4xl mt-2 flex-none">
+  <h1 class="boot-line text-teal-300" data-line="{SITE_TITLE}">
+    {SITE_TITLE}
+  </h1>
+</header>
+
+<hr class="bg-teal-500 border flex-none h-[2px] my-4 shadow-md" />
