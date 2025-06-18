@@ -25,7 +25,6 @@ const processedEntries = entries
     if (a.lang === 'en' && b.lang !== 'en') return -1;
     if (a.lang !== 'en' && b.lang === 'en') return 1;
 
-
     return b.data.pubDate.getTime() - a.data.pubDate.getTime();
   });
 

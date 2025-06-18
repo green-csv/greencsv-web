@@ -1,0 +1,30 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import BlogPost from "../../layouts/EntryLayout.astro";
+import { render } from "astro:content";
+import SandboxLayout from "../../layouts/SandboxLayout.astro";
+
+
+export async function getStaticPaths() {
+  const posts = await getCollection('sandbox');
+  debugger
+  return posts.map((post) => {
+
+    const pathParts = post.id.split('/');
+    if (pathParts.length < 2) return null;
+
+    return {
+      params: { slug: post.id },
+      props: post,
+    };
+  });
+}
+type Props = CollectionEntry<'sandbox'>;
+
+const { Content } = await render(Astro.props);
+
+const lang = Astro.params;
+---
+<SandboxLayout {...Astro.props.data}>
+  <Content/>
+</SandboxLayout>

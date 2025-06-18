@@ -1,0 +1,30 @@
+---
+export const hydrate = 'load';
+---
+
+<canvas id="gl-canvas" style="width:100%;aspect-ratio:1/1;"></canvas>
+
+<script>
+
+  import * as THREE from 'three';
+
+  const canvas = document.getElementById('gl-canvas');
+  const renderer = new THREE.WebGLRenderer({ canvas });
+  const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+  camera.position.z = 2;
+
+  const scene = new THREE.Scene();
+  const geometry = new THREE.BoxGeometry();
+  const material = new THREE.MeshNormalMaterial();
+  const cube = new THREE.Mesh(geometry, material);
+  scene.add(cube);
+
+  function animate() {
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  }
+  animate();
+</script>

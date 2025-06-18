@@ -1,0 +1,37 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { SITE_TITLE } from "../../consts";
+import SandboxScreen from "../../components/vue/SandBoxScreen.vue"
+import { getCollection } from "astro:content";
+
+const entries = await getCollection("sandbox");
+
+const processedEntries = entries
+  .sort((a, b) => {
+    return b.data.pubDate.getTime() - a.data.pubDate.getTime();
+  });
+
+
+
+const pageTitle = `SandBox | ${SITE_TITLE}`;
+
+
+debugger
+
+
+---
+
+<MainLayout title={pageTitle}>
+  <Header />
+
+  <div class="flex grow flex-col overflow-y-auto">
+    <div class="container mx-auto flex flex-col grow mb-4">
+      <SandboxScreen client:load entries={processedEntries}  />
+    </div>
+  </div>
+
+
+  <Footer />
+</MainLayout>

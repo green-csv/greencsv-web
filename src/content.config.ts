@@ -3,7 +3,10 @@ import { defineCollection, z } from 'astro:content';
 
 const entry = defineCollection({
 
-	loader: glob({ base: './src/content/entry', pattern: '**/*.{md,mdx}' }),
+	loader: glob({
+    base: './src/content/entry',
+    pattern: '**/*.{md,mdx}'
+  }),
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
@@ -16,4 +19,16 @@ const entry = defineCollection({
 	}),
 });
 
-export const collections = { entry };
+const sandbox = defineCollection({
+  loader: glob({
+    base: './src/content/sandbox',
+    pattern: '**/*.{md,mdx}'
+  }),
+  schema: z.object({
+    title: z.string(),
+    pubDate: z.coerce.date(),
+  }),
+});
+
+
+export const collections = { entry, sandbox };
