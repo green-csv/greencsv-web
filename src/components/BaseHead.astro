@@ -87,3 +87,18 @@ const {
   }
 })}>
 </script>
+<Fragment set:head>
+<!-- 1) gtag.js loader -->
+<script is:inline
+async
+src="https://www.googletagmanager.com/gtag/js?id=G-BKTLGHY17Z"
+></script>
+
+<!-- 2) gtag configuration -->
+<script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BKTLGHY17Z');
+</script>
+</Fragment>
