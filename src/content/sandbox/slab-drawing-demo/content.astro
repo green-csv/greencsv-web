@@ -1,7 +1,7 @@
 ---
 export const hydrate = 'load';
 ---
-<canvas id="slabCanvas" width="600" height="400" class="border border-amber-50"></canvas>
+<canvas id="slabCanvas"  class="border border-amber-50 w-full h-[700px]"></canvas>
 <p id="areaInfo">:Info</p>
 <script>
   const canvas = document.getElementById('slabCanvas');
@@ -14,6 +14,18 @@ export const hydrate = 'load';
 
   let lastGradientUpdate = 0;
   const GRADIENT_INTERVAL = 300;
+
+  function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+
+    return { width: rect.width, height: rect.height };
+  }
+
+  resizeCanvas();
+
+  window.addEventListener('resize', resizeCanvas);
 
 
 
@@ -38,6 +50,9 @@ export const hydrate = 'load';
 
 
   canvas.addEventListener('mousemove', (e) => {
+
+    showSummary(e);
+
     if (!isDrawing) return;
     const now = Date.now();
     const rect = canvas.getBoundingClientRect();
@@ -54,7 +69,7 @@ export const hydrate = 'load';
     }
 
     drawSlab();
-    showSummary();
+
   });
 
   canvas.addEventListener('mouseup', (e) => {
@@ -81,12 +96,18 @@ export const hydrate = 'load';
 
 
 
-  function showSummary() {
-    if (!slab) return;
-    const area = Math.abs(slab.width * slab.height);
+  function showSummary(e) {
+    const rect = canvas.getBoundingClientRect();
+    const canvasX = e.clientX - rect.left;
+    const canvasY = e.clientY - rect.top;
     const areaInfo = document.getElementById('areaInfo');
-    areaInfo.textContent = `Width: ${Math.abs(slab?.width || 0 )} px, Height: ${Math.abs(slab?.height || 0)} px`;
+
+    if (!slab) {
+      areaInfo.textContent = `Canvas position: (${Math.round(canvasX)} , ${Math.round(canvasY)})`;
+      return;
+    }
+
+    const area = Math.abs(slab.width * slab.height);
+    areaInfo.textContent = `Width: ${Math.abs(slab.width)} px, Height: ${Math.abs(slab.height)} px, Canvas position: (${Math.round(canvasX)} , ${Math.round(canvasY)})`;
   }
 </script>
-
-
