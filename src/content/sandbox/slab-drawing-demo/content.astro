@@ -1,0 +1,92 @@
+---
+export const hydrate = 'load';
+---
+<canvas id="slabCanvas" width="600" height="400" class="border border-amber-50"></canvas>
+<p id="areaInfo">:Info</p>
+<script>
+  const canvas = document.getElementById('slabCanvas');
+  const ctx = canvas.getContext('2d');
+  let isDrawing = false;
+  let startX = 0, startY = 0;
+  let
+    slab,
+    gradient = null;
+
+  let lastGradientUpdate = 0;
+  const GRADIENT_INTERVAL = 300;
+
+
+
+  function getRandomColor() {
+    const r = () => Math.floor(Math.random() * 256);
+    return `rgb(${r()}, ${r()}, ${r()})`;
+  }
+
+  function createRandomGradient(x, y, width, height) {
+    const grad = ctx.createLinearGradient(x, y, x + width, y + height);
+    grad.addColorStop(0, getRandomColor());
+    grad.addColorStop(1, getRandomColor());
+    return grad;
+  }
+
+  canvas.addEventListener('mousedown', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    startX = e.clientX - rect.left;
+    startY = e.clientY - rect.top;
+    isDrawing = true;
+  });
+
+
+  canvas.addEventListener('mousemove', (e) => {
+    if (!isDrawing) return;
+    const now = Date.now();
+    const rect = canvas.getBoundingClientRect();
+    const currentX = e.clientX - rect.left;
+    const currentY = e.clientY - rect.top;
+    const width = currentX - startX;
+    const height = currentY - startY;
+
+
+    slab = { x: startX, y: startY, width, height };
+    if (now - lastGradientUpdate > GRADIENT_INTERVAL) {
+      gradient = createRandomGradient(startX, startY, width, height);
+      lastGradientUpdate = now;
+    }
+
+    drawSlab();
+    showSummary();
+  });
+
+  canvas.addEventListener('mouseup', (e) => {
+    if (!isDrawing) return;
+    const rect = canvas.getBoundingClientRect();
+    const endX = e.clientX - rect.left;
+    const endY = e.clientY - rect.top;
+    isDrawing = false;
+
+    const width = endX - startX;
+    const height = endY - startY;
+    slab = { x: startX, y: startY, width, height };
+  });
+
+  function drawSlab() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (!slab) return;
+    ctx.fillStyle = gradient || '#e0e0e0';
+    ctx.fillRect(slab.x, slab.y, slab.width, slab.height);
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(slab.x, slab.y, slab.width, slab.height);
+  }
+
+
+
+  function showSummary() {
+    if (!slab) return;
+    const area = Math.abs(slab.width * slab.height);
+    const areaInfo = document.getElementById('areaInfo');
+    areaInfo.textContent = `Width: ${Math.abs(slab?.width || 0 )} px, Height: ${Math.abs(slab?.height || 0)} px`;
+  }
+</script>
+
+
