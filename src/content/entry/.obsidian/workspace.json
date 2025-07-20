@@ -1,0 +1,212 @@
+{
+  "main": {
+    "id": "79bb7b97ae8c5a4a",
+    "type": "split",
+    "children": [
+      {
+        "id": "4d33c8b49ace108c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a086dcdee2b467f0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "en/test.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "test"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "31b35464b2b8c46a",
+    "type": "split",
+    "children": [
+      {
+        "id": "2496f6be997efe4f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6033b8639b436aef",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "d0a056aae7726eaf",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "d5fa6e10bc11a2a5",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 392.5
+  },
+  "right": {
+    "id": "c45c19a795542534",
+    "type": "split",
+    "children": [
+      {
+        "id": "19269a5b277b571c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e75a145276b1635a",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "🧠 Architecture.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for 🧠 Architecture"
+            }
+          },
+          {
+            "id": "b136f80790a33f81",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "🧠 Architecture.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from 🧠 Architecture"
+            }
+          },
+          {
+            "id": "cd2fc4bd4ca861f8",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "99ce0c48b2003df0",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Dispatches/Dispatches.canvas"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Dispatches"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "iconic:Open rulebook": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "a086dcdee2b467f0",
+  "lastOpenFiles": [
+    "en/ai-here-ai-there-ai-blah-blah-blah.md",
+    "NewEra/Access.md",
+    "Cinte/General.md",
+    "Cinte/Legal/Contrato.pdf",
+    "🧠 Architecture.md",
+    "🧠 Blog Integration Blueprint.md",
+    "GreenCsv/Keys.md",
+    "NewEra/StockTrack.md",
+    "Cinte/SIERJU/Consejo Superior de la Judicatura.drawio",
+    "Cinte/SIERJU/attachments/Pasted image 20250227084112.png",
+    "Cinte/SIERJU/attachments/Pasted image 20250124144823.png",
+    "Cinte/SIERJU/attachments/Pasted image 20250122062951.png",
+    "Cinte/SIERJU/attachments/Pasted image 20250120005959.png",
+    "Orion/Primeras Notas.md",
+    "Cinte/SIERJU/Untitled.md",
+    "Cinte/SIERJU/SEIRJU_keys.md",
+    "Cinte/Legal",
+    "Cinte/Hitts/Untitled.md",
+    "Cinte/SIERJU/attachments",
+    "Cinte/SIERJU",
+    "Cinte/Hitts/attachments/Pasted image 20250227084112.png",
+    "Cinte/Hitts/SEIRJU_keys.md",
+    "Cinte/Hitts/Untitled.canvas",
+    "Cinte/Hitts/Consejo Superior de la Judicatura.drawio",
+    "Orion/Untitled.md",
+    "Cinte",
+    "Hitts/Untitled Diagram.svg",
+    "Hitts/Drawing 2025-01-30 13.39.17.excalidraw.md",
+    "Cinte/Hitts/attachments/Pasted image 20250120005959.png",
+    "Cinte/Hitts/attachments/Pasted image 20250124144823.png",
+    "Excalidraw/Drawing 2025-01-30 13.34.09.excalidraw.md",
+    "Excalidraw",
+    "Hitts/attachments/Pasted image 20250124145019.png",
+    "Cinte/Hitts/attachments",
+    "Cinte/Hitts/attachments/Pasted image 20250122062951.png",
+    "Hitts/Untitled 2.canvas",
+    "Orion",
+    "Dispatches/Dispatches.canvas",
+    "Welcome.md"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "biggerIcons": "on",
+  "clickableIcons": "off",
+  "showAllFileIcons": true,
+  "showAllFolderIcons": true,
+  "minimalFolderIcons": false,
+  "showItemName": "desktop",
+  "biggerSearchResults": "on",
+  "maxSearchResults": 50,
+  "colorPicker1": "list",
+  "colorPicker2": "rgb",
+  "uncolorHover": false,
+  "uncolorDrag": false,
+  "uncolorSelect": false,
+  "uncolorQuick": false,
+  "rememberDeletedItems": false,
+  "dialogState": {
+    "iconMode": true,
+    "emojiMode": false,
+    "rulePage": "file"
+  },
+  "appIcons": {},
+  "tabIcons": {},
+  "fileIcons": {},
+  "bookmarkIcons": {},
+  "tagIcons": {},
+  "propertyIcons": {},
+  "ribbonIcons": {},
+  "fileRules": [],
+  "folderRules": []
+}

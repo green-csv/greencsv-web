@@ -1,0 +1,13 @@
+{
+  "promptDelete": false,
+  "newLinkFormat": "relative",
+  "attachmentFolderPath": "./attachments",
+  "livePreview": true,
+  "showLineNumber": true,
+  "tabSize": 2,
+  "trashOption": "none",
+  "useMarkdownLinks": true,
+  "useTab": false,
+  "readableLineLength": false,
+  "showUnsupportedFiles": true
+}
